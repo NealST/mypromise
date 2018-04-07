@@ -1,0 +1,26 @@
+{
+  "name": "mypromise",
+  "version": "1.0.0",
+  "description": "对于promise/a+规范的实现",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NealST/mypromise.git"
+  },
+  "keywords": [
+    "promise",
+    "javascript"
+  ],
+  "author": "NealST",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NealST/mypromise/issues"
+  },
+  "homepage": "https://github.com/NealST/mypromise#readme",
+  "devDependencies": {
+    "jest": "^22.4.3"
+  }
+}
