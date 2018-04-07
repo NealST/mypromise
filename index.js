@@ -132,12 +132,44 @@ export default class Promise {
     return end()
   }
   static resolve (value) {
-    
+    let newpromise = new Promise(function (resolve, reject) {
+      promiseResolve(newpromise, value, resolve, reject)
+    })
+    return newpromise
   }
   static race (promiseArrays) {
-    
+    if (!Array.isArray(promiseArrays)) {
+      throw new Error('Promise.race must accept an array as the param')
+    }
+    return new Promise(function (resolve, reject) {
+      promiseArrays.forEach((item) => {
+        Promise.resolve(item).then((value) => {
+          resolve(value)
+        }, (error) => {
+          reject(error)
+        })
+      })
+    })
   }
   static all (promiseArrays) {
-    
+    if (!Array.isArray(promiseArrays)) {
+      throw new Error('Promise.race must accept an array as the param')
+    }
+    let promiseLength = promiseArrays.length
+    let resolveNumbers = 0
+    let resolveValues = []
+    return new Promise(function (resolve, reject) {
+      promiseArrays.forEach((item) => {
+        Promise.resolve(item).then((value) => {
+          resolveValues.push(value)
+          resolveNumbers++
+          if (resolveNumbers === promiseLength) {
+            resolve(resolveValues)
+          }
+        }, (error) => {
+          reject(error)
+        })
+      })
+    })
   }
 }
